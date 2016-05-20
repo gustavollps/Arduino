@@ -1,0 +1,42 @@
+#include "PID.h"
+
+PID::PID(){
+	//PID constructor
+	setPoint = 0;
+}
+
+
+void PID::setParameters(float _P,float _I,float _D, float _pid_min, float _pid_max){
+	kp = _P;
+	ki = _I;
+	kd = _D;	
+	pid_min = _pid_min;
+	pid_max = _pid_max;
+}
+
+void PID::changeSetPoint(float _setPoint){
+	setPoint = _setPoint;
+}
+
+float PID::getI(){
+	return I;
+}
+
+float PID::Compute(float read){
+	NewTime = micros();
+	dTime = double(OldTime - NewTime)/1000000.000000;
+	double error = setPoint - read;
+	dError = oError-error;
+	oError = error;
+	P = error*kp;
+	I += (error*dTime)*ki;
+	D = dError/dTime*kd;
+	_PID = P+I+D;
+	_PID = constrain(_PID,pid_min,pid_max);
+	return _PID;
+}
+
+void PID::resetI(){
+	I = 0.0;
+}
+

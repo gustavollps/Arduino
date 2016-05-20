@@ -1,0 +1,27 @@
+include <PID.h>
+
+PID PID;
+
+float P = 1.0;
+float D = 1.0;
+float I = 1.0;
+float min = -100;
+float max = 100;
+float i_min = -50;
+float i_max = 50;
+
+void setup(){
+	PID.setParameters(P,I,D,min,max);
+}
+
+float setpoint = 30;
+
+void loop(){
+	float velocidade = analogRead(A0)*(max - min)/1024;
+	PID.changeSetPoint(setpoint);
+
+	float pwm = PID.Compute(velocidade);	//compensador
+	pwm = map(pwm,-100,100,0,255);
+
+	analogWrite(pwm,5);	//atuador
+}

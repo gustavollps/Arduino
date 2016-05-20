@@ -1,0 +1,10 @@
+Loop	KEYWORD1
+DebugLoop	KEYWORD1
+PIDLoop	KEYWORD1
+set_Loop_Rate	KEYWORD2
+ok	KEYWORD2
+get_Frequency	KEYWORD2
+enable_Frequency_Monitor	KEYWORD2
+disable_Frequency_Monitor	KEYWORD2
+get_Name	KEYWORD2
+Debug_Frequency	KEYWORD2

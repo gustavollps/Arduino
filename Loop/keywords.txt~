@@ -1,0 +1,7 @@
+Loop	KEYWORD1
+set_Loop_Rate	KEYWORD2
+ok	KEYWORD3
+get_Frequency	KEYWORD4
+enable_Frequency_Monitor	KEYWORD5
+disable_Frequency_Monitor	KEYWORD6
+get_Name	KEYWORD7
