@@ -1,0 +1,5 @@
+#define  NUM_GYRO_SAMPLES 500
+#define  GYRO_SIGMA_MULTIPLE 0
+
+#define ARDUINO_MEGA2560
+#define ARDUINO_UNO
