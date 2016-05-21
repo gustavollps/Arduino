@@ -24,7 +24,7 @@ Loop PIDLoop(pid_f);
 Loop DebugLoop(10);
 
 float P = 1.0;
-float I = 1.0;
+float I = 0;
 float D = 1.0;
 float pid_min = -100.0;
 float pid_max = 100.0;
@@ -69,17 +69,21 @@ binaryFloat kp, ki, kd, _setpoint, min, max;
 void loop() {
   Serial_get();  
 
-  if (PIDLoop.ok()) {
+  if (PIDLoop.ok()) {    
     speed = updateSpeed();  //in rotations per loop    
     speed = ((float)pid_f) * speed * 60.0; //convertion to RPM
     //speed = kalmanFilter.Compute(speed);
 
-    data.floatData = speed;
+    speed = 3500 + 2000*sin(2*PI*millis()/1000);
+    data.floatData = speed;       
 
-    PID.changeSetPoint(setpoint * (255.0 / 4800.0));
+    PID.changeSetPoint(setpoint * (255.0 / 6600.0));
 
-    pwm = PID.Compute(speed * (255.0 / 4800.0));
+    pwm = PID.Compute(speed * (255.0 / 6600.0));
     pwm = map(pwm, -100, 100, 0, 255);
+
+    //Serial.println(speed);
+    //Serial.println(pwm);
     Timer1.pwm(motor_pin, pwm * 4);
 
   }
