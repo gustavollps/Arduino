@@ -39,18 +39,19 @@ void PID::resetI(){
 double PID::Compute(double read){
 
 	NewTime = micros();
-	dTime = ((double)(OldTime - NewTime))/1000000.0d;
+	dTime = (double)(OldTime - NewTime);
+	dTime /= (double)10e6;
 	double error = setPoint - read;
 	dError = oError-error;
 
 	P = error*kp;
 
-	I += constrain(((error+oError)/2.0*dTime)*ki,pid_min,pid_max);	
+	I += constrain(((error+oError)/(double)2.0*dTime)*ki/1000.000,pid_min,pid_max);	
 	if(i_min < i_max){
 		I = constrain(I,i_min,i_max);
 	}
 
-	D = dError/dTime*kd;
+	D = dError/dTime*kd*1000.000;
 
 	oError = error;
 	_PID = P+I+D;
