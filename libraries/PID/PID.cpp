@@ -39,7 +39,7 @@ void PID::resetI(){
 double PID::Compute(double read){
 
 	NewTime = micros();
-	dTime = ((double)(OldTime - NewTime))/1000000.0;
+	dTime = ((double)(OldTime - NewTime))/1000000.0d;
 	double error = setPoint - read;
 	dError = oError-error;
 
